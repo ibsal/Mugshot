@@ -1,8 +1,6 @@
 import pixelMethods as pm
 from PIL import Image
 import numpy as np
-from numba import jit, njit, prange
-
 # Runs faster without jit
 def apply(path, func, amount, new_path):
 	a = Image.open(path)
