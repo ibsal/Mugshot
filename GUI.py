@@ -5,7 +5,7 @@ import testBed as tb
 import numpy as np
 import pixelMethods as pm
 
-def applyUpdate(local, func, inp):
+def applyUpdate(local, func, inp): # Apply is literal garbage at the moment I will look into fixing it
 	tb.apply(local, func, inp(), path)
 
 def updateImage():
