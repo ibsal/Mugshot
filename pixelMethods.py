@@ -8,7 +8,7 @@ from numba import njit, prange
 def fixScale(low, high, value): # Verifies a value falls within a range, e.g. 0-255.
 	if(value<low): return low   # Rounds if above or below range
 	if(value>high): return high
-	return value
+	return int(value)
 
 @njit()
 def dummy(pixel, amount): # Dummy function to test runtimes
@@ -16,7 +16,7 @@ def dummy(pixel, amount): # Dummy function to test runtimes
 
 @njit()
 def brightness(pixel, amount): # Pixel is a np array, applies the brightness effect. Looks ugly but it ran faster than the prettier code.
-	return ([fixScale(0,255,pixel[0]+amount),fixScale(0,255,pixel[1]+amount),fixScale(0,255,pixel[2]+amount)]) 
+	return (fixScale(0,255,pixel[0]+amount),fixScale(0,255,pixel[1]+amount),fixScale(0,255,pixel[2]+amount)) 
 
 
 @njit()
