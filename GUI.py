@@ -32,7 +32,7 @@ def applyAll(null):
 back = "white"
 
 window = tk.Tk()
-window.iconphoto(False, tk.PhotoImage(file='mug.png'))
+#window.iconphoto(False, tk.PhotoImage(file='mug.png'))
 window.title("Mugshot")
 window.geometry("300x300")
 window.configure(background=back)
