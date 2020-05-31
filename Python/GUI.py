@@ -4,28 +4,19 @@ from PIL import ImageTk, Image
 import numpy as np
 import pixelMethods as pm
 
-def applyUpdate(local, func, inp): # Apply is literal garbage at the moment I will look into fixing it.
-	pm.apply(local, func, inp(), path)
-
-def updateImage(): # Garbage
+def updateImage(): # Updates the image in the GUI
 	img = ImageTk.PhotoImage(Image.open(path))
 	panel.config(image=img)
 	panel.image = img
 	window.update_idletasks()
 
-def applyContrast(local): # Garbage
-	applyUpdate(local, pm.contrast, cscale.get)
+def applyUpdate(local, func, inp): # Applies an a function to an image found denoted by local. Uses a function passed to inp as the argument of the function.
+	pm.apply(local, func, inp(), path)
 
-def applyBrightness(local): # Garbage
-	applyUpdate(local, pm.brightness, bscale.get)
-
-def applyExposure(local): # Garbage
-	applyUpdate(local, pm.exposure, escale.get)
-
-def applyAll(null): # Garbage
-	applyBrightness(originalpath)
-	applyContrast(path)
-	applyExposure(path)
+def applyAll(null):
+	applyUpdate(originalpath, pm.brightness, bscale.get)
+	applyUpdate(path, pm.contrast, cscale.get)
+	applyUpdate(path, pm.exposure, escale.get)
 	updateImage()
 
 back = "white"
