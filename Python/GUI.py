@@ -3,6 +3,7 @@ from tkinter import filedialog
 from PIL import ImageTk, Image
 import numpy as np
 import pixelMethods as pm
+import apply as p 
 
 def updateImage(): # Updates the image in the GUI
 	img = ImageTk.PhotoImage(Image.open(path))
@@ -11,7 +12,7 @@ def updateImage(): # Updates the image in the GUI
 	window.update_idletasks()
 
 def applyUpdate(local, func, inp): # Applies an a function to an image found denoted by local. Uses a function passed to inp as the argument of the function.
-	pm.apply(local, func, inp(), path)
+	p.apply(local, func, inp(), path)
 
 def applyAll(null):
 	applyUpdate(originalpath, pm.brightness, bscale.get)
