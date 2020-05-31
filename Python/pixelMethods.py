@@ -1,5 +1,6 @@
 import numpy as np
 from numba import njit, prange
+from PIL import Image
 
 #Adding @njit() makes stuff speedy fast. Not sure why yet.
 #Apparently range is supposed to be switched with prange if you add njit though
@@ -15,7 +16,7 @@ def dummy(pixel, amount): # Dummy function to test runtimes
 	return pixel
 
 @njit()
-def brightness(pixel, amount): # Pixel is a np array, applies the brightness effect. Looks ugly but it ran faster than the prettier code.
+def brightness(pixel, amount): # applies the brightness effect. Looks ugly but it ran faster than the prettier code.
 	return (fixScale(0,255,pixel[0]+amount),fixScale(0,255,pixel[1]+amount),fixScale(0,255,pixel[2]+amount)) 
 
 
@@ -26,8 +27,17 @@ def contrast(pixel, factor): # Contrast effect. Looks super ugly, but for whatev
 @njit()
 def exposure(p, ev):
 	return (fixScale(0,255, p[0] + invert(p[0])*ev), fixScale(0,255, p[1] + invert(p[1])*ev), fixScale(0,255, p[2] + invert(p[2])*ev))
-	#return (fixScale(0,255,p[0] * (2**ev)), fixScale(0,255,p[1] * (2**ev)), fixScale(0,255,p[2] * (2**ev)))
 
 @njit()
 def invert(value, high=255):
 	return high-value
+
+# Runs faster without jit
+def apply(path, func, amount, new_path):
+	a = Image.open(path)
+	heightList = range(a.height)
+	widthList = range(a.width)
+	for i in heightList:  # Iterates through each pixel, applying the func
+		for x in widthList:
+			a.putpixel((i,x),func(a.getpixel((i,x)),amount))
+	a.save(new_path)

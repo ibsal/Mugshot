@@ -1,29 +1,28 @@
 import tkinter as tk
 from tkinter import filedialog
 from PIL import ImageTk, Image
-import testBed as tb
 import numpy as np
 import pixelMethods as pm
 
-def applyUpdate(local, func, inp): # Apply is literal garbage at the moment I will look into fixing it
-	tb.apply(local, func, inp(), path)
+def applyUpdate(local, func, inp): # Apply is literal garbage at the moment I will look into fixing it.
+	pm.apply(local, func, inp(), path)
 
-def updateImage():
+def updateImage(): # Garbage
 	img = ImageTk.PhotoImage(Image.open(path))
 	panel.config(image=img)
 	panel.image = img
 	window.update_idletasks()
 
-def applyContrast(local):
+def applyContrast(local): # Garbage
 	applyUpdate(local, pm.contrast, cscale.get)
 
-def applyBrightness(local):
+def applyBrightness(local): # Garbage
 	applyUpdate(local, pm.brightness, bscale.get)
 
-def applyExposure(local):
+def applyExposure(local): # Garbage
 	applyUpdate(local, pm.exposure, escale.get)
 
-def applyAll(null):
+def applyAll(null): # Garbage
 	applyBrightness(originalpath)
 	applyContrast(path)
 	applyExposure(path)
