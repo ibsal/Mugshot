@@ -24,28 +24,28 @@ back = "white"
 window = tk.Tk()
 #window.iconphoto(False, tk.PhotoImage(file='mug.png'))
 window.title("Mugshot")
-window.geometry("300x300")
+window.geometry("500x500")
 window.configure(background=back)
 
-originalpath = filedialog.askopenfilename()
-path = filedialog.asksaveasfilename()
-img = ImageTk.PhotoImage(Image.open(originalpath))
+originalpath = filedialog.askopenfilename() # Ask for image to edit
+path = filedialog.asksaveasfilename() # Ask for filename to save as
+img = ImageTk.PhotoImage(Image.open(originalpath)) # Opens original image and stores it in img
 
 # Initialize stuff
-contraVal = tk.IntVar()
+contraVal = tk.IntVar() # Initialize slider variables
 brightVal = tk.IntVar()
 exposeVal = tk.IntVar()
 
-panel = tk.Label(window, image = img, bg=back)
+panel = tk.Label(window, image = img, bg=back) # Initialize label and scale objects
 cscale = tk.Scale(window, from_=0, to=2, resolution=0.01, orient="horizontal", variable=contraVal, label="Contrast",bg=back)
 bscale = tk.Scale(window, from_=-255, to=255, resolution=0.01, orient="horizontal", variable=brightVal, label="Brightness",bg=back)
 escale = tk.Scale(window, from_=-1, to=1, resolution=0.01, orient="horizontal", variable=exposeVal, label="Exposure",bg=back)
 
-escale.bind("<ButtonRelease-1>", applyAll)
+escale.bind("<ButtonRelease-1>", applyAll) # Bind scale resleases to updating the image
 bscale.bind("<ButtonRelease-1>", applyAll)
 cscale.bind("<ButtonRelease-1>", applyAll)
 
-bscale.set(0)
+bscale.set(0) # Sets default position of scale
 cscale.set(1)
 
 # Pack stuff
